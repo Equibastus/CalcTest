@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //   Read source data
 
-//        System.out.println("введите выражение вида 2 + 3");
+        System.out.println("введите выражение вида 2 + 3");
         String input = new Scanner(System.in).nextLine();
 
 //   Processing
@@ -46,7 +46,7 @@ public class Main {
                 number1 = Integer.decode((expressionParts[0]));
                 number2 = Integer.decode((expressionParts[1]));
             } catch (NumberFormatException e) {
-                System.out.println("это не арабские цифры точно");
+//                System.out.println("это не арабские цифры точно");
                 isNumber = false;
             }
             if (isNumber) {
