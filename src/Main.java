@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //   Read source data
 
-        System.out.println("введите выражение вида 2 + 3");
+//        System.out.println("введите выражение вида 2 + 3");
         String input = new Scanner(System.in).nextLine();
 
 //   Processing
@@ -52,7 +52,7 @@ public class Main {
             if (isNumber) {
                 //   выполняем арифметическое действие над числами
 //            в арабском формате
-                System.out.println("арабские " + input);//+"  " + number1 + "  " + number2);
+//                System.out.println("арабские " + input);//+"  " + number1 + "  " + number2);
                 number1 = Integer.decode((expressionParts[0]));
                 number2 = Integer.decode((expressionParts[1]));
 
@@ -94,34 +94,34 @@ public class Main {
             throw new Exception("Римляне не знали нуля");
         } else {
             for (int i = 1; i < 11; i++) {
-                System.out.println("Iteratioon " + i);
+//                System.out.println("Iteratioon " + i);
                 if (expressionParts[0].equals(romanDigits[i])) {
                     number1 = i;
-                    System.out.println("number1 = " + i);
+//                    System.out.println("number1 = " + i);
                 }
                 if (expressionParts[1].equals(romanDigits[i])) {
                     number2 = i;
-                    System.out.println("number2 = " + i);
+//                    System.out.println("number2 = " + i);
                 }
-                System.out.println("Переводим в арабские");
+//                System.out.println("Переводим в арабские");
 
             }
 
         }
         if (input.contains("+")) {
-            System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
+//            System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
 
             romanResult = romanDigits[number1 + number2];
         } else if (input.contains("-")) {
-            System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
+//            System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
             if (number1 - number2>=1) romanResult = romanDigits[number1 - number2];
             else throw new Exception("\"У римлян были только натуральные числа\"");
         } else if (input.contains("/")) {
-            System.out.println("делить " + input + " First " + number1 + " Second " + number2);
+//            System.out.println("делить " + input + " First " + number1 + " Second " + number2);
             if (number1 / number2>=1) romanResult = romanDigits[number1 / number2];
             else throw new Exception("\"Результат меньше единицы. У римлян дробей не было\"");
         } else if (input.contains("*")) {
-            System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
+//            System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
             romanResult = romanDigits[number1 * number2];
         } else {
             throw new Exception("\"этого не может быть =)))\"");
@@ -137,17 +137,17 @@ public class Main {
         if (0 < number1 & number1 <= 10 & 0 < number2 & number2 <= 10) {
 //              Возввращаем результат
             if (input.contains("+")) {
-                System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
+//                System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
 
                 return String.valueOf(number1 + number2);
             } else if (input.contains("-")) {
-                System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
+//                System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
                 return String.valueOf(number1 - number2);
             } else if (input.contains("*")) {
-                System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
+//                System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
                 return String.valueOf(number1 * number2);
             } else if (input.contains("/")) {
-                System.out.println("делить " + input + " First " + number1 + " Second " + number2);
+//                System.out.println("делить " + input + " First " + number1 + " Second " + number2);
                 return String.valueOf(number1 / number2);
             } else {
                 throw new Exception("\"этого не может быть =)))\"");
