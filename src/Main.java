@@ -59,21 +59,7 @@ public class Main {
 //                Проверяем на сооответствие интервалу от 0до 10
                 if (0 < number1 & number1 <= 10 & 0 < number2 & number2 <= 10) {
 /*              Возввращаем результат
-                    if (input.contains("+")) {
-                        System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
 
-                        return String.valueOf(number1 + number2);
-                    } else if (input.contains("-")) {
-                        System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
-                        return String.valueOf(number1 - number2);
-                    } else if (input.contains("*")) {
-                        System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
-                        return String.valueOf(number1 * number2);
-                    } else if (input.contains("/")) {
-                        System.out.println("делить " + input + " First " + number1 + " Second " + number2);
-                        return String.valueOf(number1 / number2);
-                    } else {
-                        throw new Exception("\"этого не может быть =)))\"");
                     }*/
                     return arabOperation(number1, number2, input);
                 } else {
@@ -97,20 +83,51 @@ public class Main {
     }
 
     public static String romanOperation(String[] expressionParts, String input) throws Exception {
-
+        int number1 = 0;
+        int number2 = 0;
+        String romanResult = null;
         String[] romanDigits = {
-                "0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"
+                "0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"
         };
-        if (expressionParts[0].equals(romanDigits[0]) | (expressionParts[1].equals(romanDigits[0])) {
+        if (expressionParts[0].equals(romanDigits[0]) | expressionParts[1].equals(romanDigits[0])) {
             throw new Exception("Римляне не знали нуля");
-        }else {
+        } else {
+            for (int i = 1; i < 11; i++) {
+                System.out.println("Iteratioon " + i);
+                if (expressionParts[0].equals(romanDigits[i])) {
+                    number1 = i;
+                    System.out.println("number1 = " + i);
+                }
+                if (expressionParts[1].equals(romanDigits[i])) {
+                    number2 = i;
+                    System.out.println("number2 = " + i);
+                }
+                System.out.println("Переводим в арабские");
 
-            
+            }
+
         }
-    }
-        return input;
-}
+        if (input.contains("+")) {
+            System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
 
+            romanResult = romanDigits[number1 + number2];
+        } else if (input.contains("-")) {
+            System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
+            if (number1 - number2>=1) romanResult = romanDigits[number1 - number2];
+            else throw new Exception("\"У римлян были только натуральные числа\"");
+        } else if (input.contains("/")) {
+            System.out.println("делить " + input + " First " + number1 + " Second " + number2);
+            if (number1 / number2>=1) romanResult = romanDigits[number1 / number2];
+            else throw new Exception("\"Результат меньше единицы. У римлян дробей не было\"");
+        } else if (input.contains("*")) {
+            System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
+            romanResult = romanDigits[number1 * number2];
+        } else {
+            throw new Exception("\"этого не может быть =)))\"");
+        }
+        return romanResult;
+    }
 
     public static String arabOperation(int number1, int number2, String input) throws Exception {
 //        int number1;
@@ -141,6 +158,10 @@ public class Main {
         return input;
     }
 }
+
+
+
+
 
 
 
