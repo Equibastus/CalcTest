@@ -1,14 +1,11 @@
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
-
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-//   Read source data
-
-        System.out.println("введите выражение вида 2 + 3");
+// Get data
+        System.out.println("введите выражение вида 2 + 3 или X * VII");
         String input = new Scanner(System.in).nextLine();
 
 //   Processing
@@ -20,7 +17,6 @@ public class Main {
 
     }
 
-    // Метод по заданию
     public static String calc(String input) throws Exception {
 // Приводим строку к верхнему регистру и убираем пробелы
 
@@ -32,14 +28,10 @@ public class Main {
 
         // Делим строку по оператору
         String[] expressionParts = input.split("[+\\-*/]");
-//        System.out.println("первый "+expressionParts[0]+"второй "+expressionParts[1]+"длина "+expressionParts.length);
 
         if (expressionParts.length < 2) throw new Exception("Введите не менее двух чисел");
-
         else if (expressionParts.length > 2) throw new Exception("Введите не более двух чисел");
-
         else if (expressionParts.length == 2) {
-
             try {
                 // Проверяем полученные операнды на принадлежность
                 // к арабским цифрам
@@ -50,78 +42,65 @@ public class Main {
                 isNumber = false;
             }
             if (isNumber) {
-                //   выполняем арифметическое действие над числами
+//           Если арабские выполняем арифметическое действие над числами
 //            в арабском формате
-//                System.out.println("арабские " + input);//+"  " + number1 + "  " + number2);
                 number1 = Integer.decode((expressionParts[0]));
                 number2 = Integer.decode((expressionParts[1]));
 
 //                Проверяем на сооответствие интервалу от 0до 10
                 if (0 < number1 & number1 <= 10 & 0 < number2 & number2 <= 10) {
-/*              Возввращаем результат
-
-                    }*/
                     return arabOperation(number1, number2, input);
                 } else {
                     throw new Exception("\"используйте числа от 1 до 10 включительно\"");
                 }
-
+//                Проверяем, не римские ли это цифры в первом операнде
             } else if (Arrays.asList("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X").contains(expressionParts[0])) {
-//                Проверяем, не римские ли это цифры
+//                Проверяем, не римские ли это цифры во втором операнде
                 if (Arrays.asList("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X").contains(expressionParts[1])) {
                     return romanOperation(expressionParts, input);
                 } else throw new Exception("введите выражение вида 2 + 3 или IV + X");
-
             } else throw new Exception("введите выражение вида 2 + 3 или IV + X");
-
         } else {
-
             throw new Exception("введите выражение вида 2 + 3");
-
         }
-
     }
 
     public static String romanOperation(String[] expressionParts, String input) throws Exception {
         int number1 = 0;
         int number2 = 0;
         String romanResult = null;
-        String[] romanDigits = {
-                "0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
-                "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"
+        String[] romanDigits = {"0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
+                "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
+                "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX",
+                "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
+                "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L",
+                "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
+                "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
+                "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
+                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+                "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"
         };
         if (expressionParts[0].equals(romanDigits[0]) | expressionParts[1].equals(romanDigits[0])) {
             throw new Exception("Римляне не знали нуля");
         } else {
             for (int i = 1; i < 11; i++) {
-//                System.out.println("Iteratioon " + i);
                 if (expressionParts[0].equals(romanDigits[i])) {
                     number1 = i;
-//                    System.out.println("number1 = " + i);
                 }
                 if (expressionParts[1].equals(romanDigits[i])) {
                     number2 = i;
-//                    System.out.println("number2 = " + i);
                 }
-//                System.out.println("Переводим в арабские");
-
             }
-
         }
         if (input.contains("+")) {
-//            System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
-
             romanResult = romanDigits[number1 + number2];
         } else if (input.contains("-")) {
-//            System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
-            if (number1 - number2>=1) romanResult = romanDigits[number1 - number2];
+            if (number1 - number2 >= 1) romanResult = romanDigits[number1 - number2];
             else throw new Exception("\"У римлян были только натуральные числа\"");
         } else if (input.contains("/")) {
-//            System.out.println("делить " + input + " First " + number1 + " Second " + number2);
-            if (number1 / number2>=1) romanResult = romanDigits[number1 / number2];
+            if (number1 / number2 >= 1) romanResult = romanDigits[number1 / number2];
             else throw new Exception("\"Результат меньше единицы. У римлян дробей не было\"");
         } else if (input.contains("*")) {
-//            System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
             romanResult = romanDigits[number1 * number2];
         } else {
             throw new Exception("\"этого не может быть =)))\"");
@@ -129,40 +108,21 @@ public class Main {
         return romanResult;
     }
 
+
     public static String arabOperation(int number1, int number2, String input) throws Exception {
-//        int number1;
-//        int number2;
-
-
         if (0 < number1 & number1 <= 10 & 0 < number2 & number2 <= 10) {
-//              Возввращаем результат
             if (input.contains("+")) {
-//                System.out.println("плюс " + input + " First " + number1 + " Second " + number2);
-
                 return String.valueOf(number1 + number2);
             } else if (input.contains("-")) {
-//                System.out.println("минус  " + input + " First " + number1 + " Second " + number2);
                 return String.valueOf(number1 - number2);
             } else if (input.contains("*")) {
-//                System.out.println("умножить " + input + " First " + number1 + " Second " + number2);
                 return String.valueOf(number1 * number2);
             } else if (input.contains("/")) {
-//                System.out.println("делить " + input + " First " + number1 + " Second " + number2);
                 return String.valueOf(number1 / number2);
             } else {
                 throw new Exception("\"этого не может быть =)))\"");
-
             }
-
         }
         return input;
     }
 }
-
-
-
-
-
-
-
-
